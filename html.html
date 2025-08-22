@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תפריט סער</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>תפריט סער</header>
+
+<div class="categories">
+  <button id="btnBizkes" class="category-btn active" onclick="showMenu('bizkes', this)">עסקיות ▼</button>
+  <button id="btnTossafot" class="category-btn" onclick="showMenu('tossafot', this)">תוספות ▼</button>
+  <button id="btnShtiya" class="category-btn" onclick="showMenu('shtiya', this)">שתייה ▼</button>
+</div>
+
+<div id="bizkes" class="menu" style="display:flex;">
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1606755962777-c4d36d06d15e?fit=crop&w=120&q=80" alt="סערבורגר">
+    <strong>סערבורגר</strong><br>
+    <button onclick="openModal('סערבורגר')">הוסף</button>
+  </div>
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1617196030091-9f99ef34c080?fit=crop&w=120&q=80" alt="דאבל סערבורגר">
+    <strong>דאבל סערבורגר</strong><br>
+    <button onclick="openModal('דאבל סערבורגר')">הוסף</button>
+  </div>
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1598511724021-3d82d0c5c5b6?fit=crop&w=120&q=80" alt="המבורגר">
+    <strong>המבורגר</strong><br>
+    <small>כשר</small><br>
+    <button onclick="openModal('המבורגר')">הוסף</button>
+  </div>
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1626781096110-3b09cde81ad2?fit=crop&w=120&q=80" alt="מלוואח">
+    <strong>מלוואח עם גבינה ומלפפון</strong><br>
+    <button onclick="addToOrder('מלוואח עם גבינה ומלפפון')">הוסף</button>
+  </div>
+</div>
+
+<div id="tossafot" class="menu">
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?fit=crop&w=120&q=80" alt="צ׳יפס">
+    <strong>צ׳יפס</strong><br>
+    <button onclick="addToOrder('צ׳יפס')">הוסף</button>
+  </div>
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1605692334152-8a7e6e1591c1?fit=crop&w=120&q=80" alt="מלפפון חמוץ מטוגן">
+    <strong>מלפפון חמוץ מטוגן</strong><br>
+    <button onclick="addToOrder('מלפפון חמוץ מטוגן')">הוסף</button>
+  </div>
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1606312615062-6313e9f8ee1a?fit=crop&w=120&q=80" alt="טבעות בצל">
+    <strong>טבעות בצל</strong><br>
+    <button onclick="addToOrder('טבעות בצל')">הוסף</button>
+  </div>
+</div>
+
+<div id="shtiya" class="menu">
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1599785209796-f108e6f57b5d?fit=crop&w=120&q=80" alt="מים">
+    <strong>מים</strong><br>
+    <button onclick="addToOrder('מים')">הוסף</button>
+  </div>
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1599511643374-2fbb6d8c0aa0?fit=crop&w=120&q=80" alt="מיץ פטל">
+    <strong>מיץ פטל</strong><br>
+    <button onclick="addToOrder('מיץ פטל')">הוסף</button>
+  </div>
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1599785293515-456f584e54ff?fit=crop&w=120&q=80" alt="מיץ מנגו">
+    <strong>מיץ מנגו</strong><br>
+    <button onclick="addToOrder('מיץ מנגו')">הוסף</button>
+  </div>
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1603297633792-27e82b3eae48?fit=crop&w=120&q=80" alt="דיאט קולה">
+    <strong>דיאט קולה</strong><br>
+    <button onclick="addToOrder('דיאט קולה')">הוסף</button>
+  </div>
+</div>
+
+<div class="order">
+  <h2>סל הזמנות</h2>
+  <ul id="orderList"></ul>
+  <button id="sendBtn" onclick="sendOrder()">שלח הזמנה לוואטסאפ</button>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content" dir="rtl">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3 id="modalTitle"></h3>
+    <label>בחר לחמנייה:</label>
+    <select id="modalBun"></select>
+    <h4>מרכיבים:</h4>
+    <div class="checkbox-group">
+      <input type="checkbox" id="lettuce"> חסה
+      <input type="checkbox" id="lettuceExtra"> אקסטרה חסה<br>
+      <input type="checkbox" id="onion"> בצל
+      <input type="checkbox" id="onionExtra"> אקסטרה בצל<br>
+      <input type="checkbox" id="pickles"> מלפפון חמוץ
+      <input type="checkbox" id="picklesExtra"> אקסטרה מלפפון<br>
+      <input type="checkbox" id="cheese"> גבינה
+      <input type="checkbox" id="cheeseExtra"> אקסטרה גבינה<br>
+      <input type="checkbox" id="sauce"> רוטב סודי
+      <input type="checkbox" id="sauceExtra"> אקסטרה רוטב<br>
+    </div>
+    <h4>רטבים נוספים:</h4>
+    <div class="checkbox-group">
+      <input type="checkbox" id="ketchup"> קטשופ<br>
+      <input type="checkbox" id="mayo"> מיונז<br>
+      <input type="checkbox" id="bbq"> רוטב ברביקיו<br>
+      <input type="checkbox" id="mustard"> חרדל<br>
+      <input type="checkbox" id="sriracha"> סרירצה<br>
+    </div>
+    <button onclick="addModalOrder()">הוסף לסל</button>
+  </div>
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
